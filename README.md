@@ -62,6 +62,8 @@ R2	G0/0/0	fe80::2
 R2	G0/0/1	2001:db8:acad:3::1 /64
 R2	G0/0/1	fe80::1
 PC-A	NIC	DHCP
-PC-B	NIC	DHCP
+PC-B	NIC	DHCP Global unicast address(es):
+    2001:DB8:ACAD:3:A8BB:CCFF:FE00:C000, subnet is 2001:DB8:ACAD:3::/64 [EUI/CAL/PRE]
+
 Objectives
 
