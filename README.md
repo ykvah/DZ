@@ -29,6 +29,8 @@ Building configuration...
 [OK]
 R1#clock set 18:00:00 17 apr 2025       - указать время
 
+swit trunk encapsulation dot1q
+
 Сменить имя и можно вставлять
 
 en
