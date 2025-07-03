@@ -31,20 +31,61 @@ R1#clock set 18:00:00 17 apr 2025       - указать время
 
 swit trunk encapsulation dot1q
 
+маршрутизатор
+R17(config)#int et 0/0.30
+encapsulation dot1q 30
+ip address 192.168.30.17 255.255.255.0  - ip yt gjdnjhz.obtcz yf rf;lsq vfhihenbpfnjh cdjq d 'njq ctnb
+R17(config-subif)#exit
+R17(config)#
+
+
+
+SW9#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW9(config)#int Vlan45
+SW9(config-if)#
+*Jul  2 14:48:13.439: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan45, changed state to down
+SW9(config-if)#ip addr
+SW9(config-if)#ip address 192.168.45.9 255.255.255.0
+SW9(config-if)#no ah
+                   ^
+% Invalid input detected at '^' marker.
+
+SW9(config-if)#no sh
+SW9(config-if)#
+*Jul  2 14:49:15.163: %LINK-3-UPDOWN: Interface Vlan45, changed state to up
+*Jul  2 14:49:16.167: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan45, changed state to up
+SW9(config-if)#exit
+SW9(config)#interface loopback 0
+SW9(config-if)#
+*Jul  2 14:50:22.351: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up
+SW9(config-if)#ip address 10.0.0.9 255.255.255.0
+SW9(config-if)#exit
+SW9(config)#ip default-
+SW9(config)#ip default-g
+SW9(config)#ip default-gateway 192.168.45.1
+SW9(config)#exit
+SW9#
+*Jul  2 14:51:56.681: %SYS-5-CONFIG_I: Configured from console by console
+SW9#copy running-config startup-config
+
+
+
+
+
 Сменить имя и можно вставлять
+
+
 
 en
 conf t
-hostname S1
+hostname R17
 no ip domain-lookup
-enable secret class
 line console 0          
-password cisco
 exec-timeout 99 0
 logging synchronous
 exit
 line vty 0 4
-password cisco
 exec-timeout 99 0
 logging synchronous  
 exit
@@ -53,7 +94,6 @@ service password-encryption
 banner motd #Unauthorized access prohibited! Uhodi#
 exit
 copy running-config startup-config
-
 
 Проектирование сети
 
