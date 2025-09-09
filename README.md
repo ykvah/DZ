@@ -1,5 +1,6 @@
 it
 # DZ
+<img width="1077" height="813" alt="image" src="https://github.com/user-attachments/assets/04a3ff61-8089-4724-ad01-03bb78fd6323" />
 
 начальная настройка
 Router>enable
