@@ -1,6 +1,7 @@
 it
 # DZ
-<img width="1408" height="786" alt="image" src="https://github.com/user-attachments/assets/7459b49a-dece-402a-9d56-2e8b8bd2005d" />
+<img width="2379" height="1580" alt="image" src="https://github.com/user-attachments/assets/541f3d4b-f041-492b-b01c-e657017edb25" />
+
 
 
 
