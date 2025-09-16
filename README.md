@@ -1,3 +1,13 @@
+<img width="449" height="815" alt="image" src="https://github.com/user-attachments/assets/8e05368f-cd7c-428e-912a-e3129fe61158" />
+
+<img width="394" height="781" alt="image" src="https://github.com/user-attachments/assets/d3d2c2a2-5ed8-4639-9ff4-5b4651f24f50" />
+
+
+
+
+
+
+
 Пример конфига ACC_1_1 c PSTP 
 <img width="1570" height="657" alt="image" src="https://github.com/user-attachments/assets/a90d6776-8f42-4ed4-92ef-376e3f084965" />
 
