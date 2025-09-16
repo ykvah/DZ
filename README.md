@@ -2,13 +2,21 @@
 <img width="1570" height="657" alt="image" src="https://github.com/user-attachments/assets/a90d6776-8f42-4ed4-92ef-376e3f084965" />
 
 interface e0/1
+
 ip address 10.0.2.21 255.255.255.252
+
 mpls ip
+
 interface e1/1.111
+
 description Client_VLAN111
+
 encapsulation dot1q 111
+
 no ip address
+
 xconnect 10.42.0.30 111 encapsulation mpls
+
 
 it
 # DZ
