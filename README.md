@@ -21,6 +21,11 @@ spanning-tree vlan 1-4094 cost 200
 
 <img width="937" height="1028" alt="image" src="https://github.com/user-attachments/assets/1d408725-9d5f-467e-aefe-de3075b67d05" />
 
+уже исправленный ACC_3_1
+
+<img width="668" height="984" alt="image" src="https://github.com/user-attachments/assets/9362267d-b436-402a-9bec-9185b989ee58" />
+
+
 
 
 
