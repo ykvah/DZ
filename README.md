@@ -1,3 +1,5 @@
+Пример конфига ACC_1_1 c PSTP 
+
 it
 # DZ
 
@@ -7,6 +9,11 @@ it
 <img width="1108" height="635" alt="image" src="https://github.com/user-attachments/assets/bdd149bc-cd5b-4db4-b017-6dbf9cb451ea" />
 
 
+Пример конфигурации коммутаторов 
+настройка стп на кольце позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1
+![Uploading image.png…]()
+
+<img width="937" height="1028" alt="image" src="https://github.com/user-attachments/assets/1d408725-9d5f-467e-aefe-de3075b67d05" />
 
 
 
@@ -110,6 +117,8 @@ service password-encryption
 banner motd #Unauthorized access prohibited! Uhodi#
 exit
 copy running-config startup-config
+
+
 
 Проектирование сети
 
