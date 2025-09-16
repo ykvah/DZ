@@ -1,4 +1,5 @@
 Пример конфига ACC_1_1 c PSTP 
+<img width="1570" height="657" alt="image" src="https://github.com/user-attachments/assets/a90d6776-8f42-4ed4-92ef-376e3f084965" />
 
 it
 # DZ
