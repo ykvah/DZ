@@ -11,6 +11,9 @@ it
 
 Пример конфигурации коммутаторов 
 настройка стп на кольце позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1
+например на ACC_1_1 (порт к ACC_2_2)
+interface e0/1
+spanning-tree vlan 1-4094 cost 200
 ![Uploading image.png…]()
 
 <img width="937" height="1028" alt="image" src="https://github.com/user-attachments/assets/1d408725-9d5f-467e-aefe-de3075b67d05" />
