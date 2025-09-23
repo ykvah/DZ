@@ -24,6 +24,8 @@
  
 [1]:<img width="970" height="657" alt="сх" src="https://github.com/user-attachments/assets/4488fc74-f3e7-492b-8f0b-70f5455b5efa" />
 
+</details>
+
 
 
 
