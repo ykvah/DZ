@@ -1534,7 +1534,7 @@ do copy running-config startup-config
 </details>
 
 
-
+---
 ### Подключение клиента
 <a name="Подключение_клиента"></a>
 
