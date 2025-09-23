@@ -18,6 +18,7 @@
 
 [Конфиг BRAS](#Конфиг_BRAS)
 
+[Подключение клиента](#Подключение_клиента)
 
 
 
@@ -1565,6 +1566,10 @@ do copy running-config startup-config
 
 <details>
 Несколько предыдущих топологий которые эволюционировали в нормальную для оператора
+   
+<img width="949" height="704" alt="t1" src="https://github.com/user-attachments/assets/ce8dfe22-3c9c-44dc-b129-18ebe1dc0beb" />
+
+<img width="613" height="626" alt="t2" src="https://github.com/user-attachments/assets/3c869704-a8d6-4200-a473-0adeb6f264af" />
 
    
 </details>
