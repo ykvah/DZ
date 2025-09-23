@@ -526,31 +526,606 @@ copy running-config startup-config
 
 
 
+---
+---
+---
 ### Конфиг маршрутизаторов агрегации
 <a name="Конфиг_маршрутизаторов_агрегации"></a>
 
 
 #### Полный набор команд для конфигурации
 
+Добавляем на каждый Agr настройку backup peer на случай перестроения канала. 
+
 ##### Agr1
 
 <details>
+en
+   
+conf t
+   
+hostname Agr1
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+hostname Agr1
+   
+mpls ip
+   
+mpls label protocol ldp
+   
+interface e1/1.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.11 255.255.255.0
+   
+ip default-gateway 10.42.42.1
+   
+interface e0/0.111
+   
+description CLIENT VLAN111
+   
+encapsulation dot1Q 111
+   
+xconnect 10.42.0.30 111 encapsulation mpls
+   
+backup peer 10.42.0.12 111
+   
+exit
+   
+exit
+   
+interface e0/0.212
+   
+description BACKUP CLIENT VLAN212
+   
+encapsulation dot1Q 212
+   
+xconnect 10.42.0.30 212 encapsulation mpls
+   
+backup peer 10.42.0.12 212 
+   
+exit
+   
+exit
+   
+interface Loopback0
+   
+ip address 10.42.0.11 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/0
+   
+ip address 10.0.1.2 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.1.10 255.255.255.252
+   
+mpls ip
+   
+ip ospf 1 area 0
+   
+no shutdown
+   
+exit
+   
+interface e0/3
+   
+ip address 10.0.2.5 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.2.21 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e1/1
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.11
+   
+network 10.42.0.11 0.0.0.0 area 0
+   
+no network 10.0.0.0 0.255.255.255 area 0
+
+network 10.0.1.2 0.0.0.0 area 0
+ 
+network 10.0.1.10 0.0.0.0 area 0
+ 
+network 10.0.2.5 0.0.0.0 area 0
+ 
+network 10.0.2.21 0.0.0.0 area 0
+
+mpls ldp router-id Loopback0 force
+   
+router bgp 420000
+   
+bgp log-neighbor-changes
+   
+bgp router-id 10.42.0.11
+neighbor 10.42.0.1   remote-as 420000
+   
+neighbor 10.42.0.2   remote-as 420000
+   
+neighbor 10.42.0.12  remote-as 420000
+   
+neighbor 10.42.0.13  remote-as 420000
+   
+neighbor 10.42.0.30 remote-as 420000
+   
+neighbor 10.42.0.1 update-source Loopback0
+   
+neighbor 10.42.0.2 update-source Loopback0
+   
+neighbor 10.42.0.12 update-source Loopback0
+   
+neighbor 10.42.0.13 update-source Loopback0
+   
+neighbor 10.42.0.30 update-source Loopback0
+   
+neighbor 10.42.0.1   route-reflector-client
+   
+neighbor 10.42.0.2   route-reflector-client
+   
+neighbor 10.42.0.12  route-reflector-client
+   
+neighbor 10.42.0.13  route-reflector-client
+   
+neighbor 10.42.0.30 route-reflector-client
+   
+address-family ipv4
+   
+neighbor 10.42.0.1   activate
+   
+neighbor 10.42.0.2   activate
+   
+neighbor 10.42.0.12  activate
+   
+neighbor 10.42.0.13  activate
+   
+neighbor 10.42.0.30  activate
+   
+exit-address-family
+   
+address-family vpnv4
+
+address-family vpnv4
+  
+neighbor 10.42.0.1 activate
+ 
+neighbor 10.42.0.1 send-community both
+  
+neighbor 10.42.0.2 activate
+  
+neighbor 10.42.0.2 send-community both
+  
+neighbor 10.42.0.12 activate
+  
+neighbor 10.42.0.12 send-community both
+  
+neighbor 10.42.0.13 activate
+  
+neighbor 10.42.0.13 send-community both
+
+neighbor 10.42.0.30 activate
+
+neighbor 10.42.0.30 send-community both
+   
+exit-address-family
+   
+exit
+   
+exit
+   
+copy running-config startup-config
 
 </details>
 
 
 ---
-
+##### Agr2
 
 <details>
+en
+   
+conf t
+   
+hostname Agr2
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+mpls ip
+   
+mpls label protocol ldp
+   
+interface e0/0.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.12 255.255.255.0
+   
+ip default-gateway 10.42.42.1
+
+   
+interface e0/0.211
+   
+description Client VLAN211
+   
+encapsulation dot1q 211
+   
+no ip address
+   
+xconnect 10.42.0.30 211 encapsulation mpls
+   
+backup peer 10.42.0.13 211
+   
+exit
+   
+exit
+   
+interface e0/0.212
+   
+description Client VLAN212
+   
+encapsulation dot1q 212
+   
+no ip address
+   
+xconnect 10.42.0.30 212 encapsulation mpls
+   
+backup peer 10.42.0.11 212
+   
+exit
+   
+exit
+   
+interface e0/0.111
+   
+description BACKUP CLIENT VLAN111
+   
+encapsulation dot1Q 111
+   
+xconnect 10.42.0.30 111 encapsulation mpls
+   
+backup peer 10.42.0.11 111
+   
+exit
+   
+exit
+   
+interface e0/0.311
+   
+description BACKUP CLIENT VLAN311
+   
+encapsulation dot1Q 311
+   
+xconnect 10.42.0.30 311 encapsulation mpls
+   
+backup peer 10.42.0.13 311 
+   
+exit
+   
+exit
+   
+interface Loopback0
+   
+ip address 10.42.0.12 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/0
+   
+ip address 10.0.2.6 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.2.9 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.2.13 255.255.255.252
+   
+mpls ip
+   
+ip ospf 1 area 0
+   
+no shutdown
+   
+exit
+
+interface e0/3
+   
+ip address 10.0.2.25 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.12
+   
+network 10.42.0.12 0.0.0.0 area 0
+   
+network 10.0.2.6 0.0.0.0 area 0
+   
+network 10.0.2.25 0.0.0.0 area 0
+
+mpls ldp router-id Loopback0 force
+
+router bgp 420000
+
+bgp log-neighbor-changes
+
+bgp router-id 10.42.0.12
+
+neighbor 10.42.0.11   remote-as 420000
+
+neighbor 10.42.0.11 update-source Loopback0
+
+address-family ipv4
+
+neighbor 10.42.0.11   activate
+
+exit-address-family
+
+address-family vpnv4
+
+address-family vpnv4
+
+neighbor 10.42.0.11 activate
+
+neighbor 10.42.0.11 send-community both
+
+exit-address-family
+
+exit
+
+exit
+
+copy running-config startup-config
 
 </details>
 
 
-
+---
+##### Agr3
 
 
 <details>
+en
+   
+conf t
+   
+hostname Agr3
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+mpls ip
+   
+mpls label protocol ldp
+   
+interface e1/1.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.13 255.255.255.0
+   
+ip default-gateway 10.42.42.1
+   
+interface e0/0.311
+   
+description CLIENT VLAN311
+   
+encapsulation dot1Q 311
+   
+xconnect 10.42.0.30 311 encapsulation mpls
+   
+backup peer 10.42.0.12 311 
+   
+exit
+   
+exit
+   
+interface e0/0.211
+   
+description BACKUP Client VLAN211
+   
+encapsulation dot1q 211
+   
+no ip address
+   
+xconnect 10.42.0.30 211 encapsulation mpls
+   
+backup peer 10.42.0.12 211
+   
+exit
+   
+exit
+   
+interface Loopback0
+   
+ip address 10.42.0.13 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/0
+   
+ip address 10.0.1.6 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.2.22 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.1.14 255.255.255.252
+   
+mpls ip
+   
+ip ospf 1 area 0
+   
+no shutdown
+   
+exit
+   
+interface e0/3
+   
+ip address 10.0.2.26 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+interface e1/1
+   
+ip address 10.0.2.17 255.255.255.252
+   
+ip ospf 1 area 0
+   
+mpls ip
+   
+no shutdown
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.13
+   
+network 10.42.0.13 0.0.0.0 area 0
+   
+network 10.0.1.6 0.0.0.0 area 0
+   
+network 10.0.1.14 0.0.0.0 area 0
+   
+network 10.0.2.22 0.0.0.0 area 0
+   
+network 10.0.2.26 0.0.0.0 area 0
+   
+mpls ldp router-id Loopback0 force
+   
+router bgp 420000
+
+bgp log-neighbor-changes
+   
+bgp router-id 10.42.0.13
+   
+neighbor 10.42.0.11   remote-as 420000
+   
+neighbor 10.42.0.11 update-source Loopback0
+   
+address-family ipv4
+   
+neighbor 10.42.0.11   activate
+   
+exit-address-family
+   
+address-family vpnv4
+   
+address-family vpnv4
+   
+neighbor 10.42.0.11 activate
+   
+neighbor 10.42.0.11 send-community both
+   
+exit-address-family
+   
+exit
+   
+exit
+   
+copy running-config startup-config
 
 </details>
 
