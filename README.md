@@ -12,7 +12,7 @@
 
 [Конфиг коммутаторов](#Конфиг_коммутаторов)
 
-[Адресация](#Адресация)
+[Конфиг маршрутизаторов агрегации](#Конфиг_маршрутизаторов_агрегации)
 
 [Адресация](#Адресация)
 
@@ -137,47 +137,89 @@ Loopback - 10.42.0.xx/32
 
 <details>
 en
+   
 conf t
+
 hostname ACC_1_1
+
 no ip domain-lookup
+
 banner motd #Unauthorized access prohibited! Uhodi#
+
 vlan 42
+
 name YPR
+
 interface vlan 42
+
 ip address 10.42.42.21 255.255.255.0
+
 ip default-gateway 10.42.42.1
+
 interface Loopback0
+
 ip address 10.42.0.21 255.255.255.255
+
 no shutdown
+
 exit
+
 spanning-tree mode rapid-pvst
+
 spanning-tree vlan 1-4094 priority 4096
+
 interface e 0/0
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 no shutdown
+
 exit
+
 interface e 0/1
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 spanning-tree vlan 1-4094 cost 200
+
 no shutdown
+
 exit
+
 interface e 0/2
+
 spanning-tree portfast
+
 exit
+
 interface e 0/3
+
 spanning-tree portfast
+
 exit
+
 exit
+
 copy running-config startup-config
 
 </details>
@@ -190,47 +232,89 @@ copy running-config startup-config
 
 <details>
 en
+   
 conf t
+
 hostname ACC_2_1
+
 no ip domain-lookup
+
 banner motd #Unauthorized access prohibited! Uhodi#
+
 vlan 42
+
 name YPR
+
 interface vlan 42
+
 ip address 10.42.42.22 255.255.255.0
+
 ip default-gateway 10.42.42.1
+
 interface Loopback0
+
 ip address 10.42.0.22 255.255.255.255
+
 no shutdown
+
 exit
+
 spanning-tree mode rapid-pvst
+
 spanning-tree vlan 1-4094 priority 32768
+
 interface e 0/0
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 no shutdown
+
 exit
+
 interface e 0/1
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 spanning-tree vlan 1-4094 cost 200
+
 no shutdown
+
 exit
+
 interface e 0/3
+
 spanning-tree portfast
+
 exit
+
 interface e 0/2
+
 spanning-tree portfast
+
 exit
+
 exit
+
 copy running-config startup-config
 
 </details>
@@ -243,47 +327,89 @@ copy running-config startup-config
 
 <details>
 en
+   
 conf t
+
 hostname ACC_2_2
+
 no ip domain-lookup
+
 banner motd #Unauthorized access prohibited! Uhodi#
+
 vlan 42
+
 name YPR
+
 interface vlan 42
+
 ip address 10.42.42.23 255.255.255.0
+
 ip default-gateway 10.42.42.1
+
 interface Loopback0
+
 ip address 10.42.0.23 255.255.255.255
+
 no shutdown
+
 exit
+
 spanning-tree mode rapid-pvst
+
 spanning-tree vlan 1-4094 priority 32768
+
 interface e 0/0
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 no shutdown
+
 exit
+
 interface e 0/2
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 spanning-tree vlan 1-4094 cost 200
+
 no shutdown
+
 exit
+
 interface e 0/1
+
 spanning-tree portfast
+
 exit
+
 interface e 0/3
+
 spanning-tree portfast
+
 exit
+
 exit
+
 copy running-config startup-config
 
 </details>
@@ -296,47 +422,89 @@ copy running-config startup-config
 
 <details>
 en
+   
 conf t
+
 hostname ACC_3_1
+
 no ip domain-lookup
+
 banner motd #Unauthorized access prohibited! Uhodi#
+
 vlan 42
+
 name YPR
+
 interface vlan 42
+
 ip address 10.42.42.24 255.255.255.0
+
 ip default-gateway 10.42.42.1
+
 no shutdown
+
 interface Loopback0
+
 ip address 10.42.0.24 255.255.255.255
+
 exit
-spanning-tree mode rapid-pvstdo 
+
+spanning-tree mode rapid-pvst
+
 spanning-tree vlan 1-4094 priority 4096
+
 interface e 0/0
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 no shutdown
+
 exit
+
 interface e 0/3
+
 switchport
+
 switchport trunk encapsulation dot1q
+
 switchport mode trunk
+
 switchport trunk allowed vlan all
+
 spanning-tree portfast disable
+
 spanning-tree bpduguard disable
+
 spanning-tree vlan 1-4094 cost 200
+
 no shutdown
+
 exit
+
 interface e 0/1
+
 spanning-tree portfast
+
 exit
+
 interface e 0/2
+
 spanning-tree portfast
+
 exit
+
 exit
+
 copy running-config startup-config
 
 </details>
@@ -345,7 +513,7 @@ copy running-config startup-config
 
 
 ### Конфиг маршрутизаторов агрегации
-<a name="Конфиг маршрутизаторов агрегации"></a>
+<a name="Конфиг_маршрутизаторов_агрегации"></a>
 
 
 #### Полный набор команд для конфигурации
