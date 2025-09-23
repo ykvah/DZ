@@ -10,9 +10,12 @@
 
 [Адресация](#Адресация)
 
-[Схема](#Схема)
+[Конфиг коммутаторов](#Конфиг коммутаторов)
 
-
+[Конфиг маршрутизаторов агрегации](#Конфиг маршрутизаторов агрегации)
+[Задачи](#задачи)
+[Задачи](#задачи)
+[Задачи](#задачи)
 
 
 
@@ -107,10 +110,12 @@ Loopback - 10.42.0.xx/32
 
 ## Настройка
 
-### Конфиг коммутаторов на примере 
+### Конфиг коммутаторов 
 <a name="Конфиг коммутаторов"></a>
 
-настройка стп на кольце позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1
+настройка стп на кольце 
+
+позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1
 
 например на ACC_1_1 (порт к ACC_2_2)
 
@@ -121,15 +126,234 @@ Loopback - 10.42.0.xx/32
 
 <img width="668" height="984" alt="image" src="https://github.com/user-attachments/assets/9362267d-b436-402a-9bec-9185b989ee58" />
 
+</details>
+
+#### Полный набор команд для конфигурации коммутаторов
+
+ACC_1_1
+
+<details>
+en
+conf t
+hostname ACC_1_1
+no ip domain-lookup
+banner motd #Unauthorized access prohibited! Uhodi#
+vlan 42
+name YPR
+interface vlan 42
+ip address 10.42.42.21 255.255.255.0
+ip default-gateway 10.42.42.1
+interface Loopback0
+ip address 10.42.0.21 255.255.255.255
+no shutdown
+exit
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1-4094 priority 4096
+interface e 0/0
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+no shutdown
+exit
+interface e 0/1
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+spanning-tree vlan 1-4094 cost 200
+no shutdown
+exit
+interface e 0/2
+spanning-tree portfast
+exit
+interface e 0/3
+spanning-tree portfast
+exit
+exit
+copy running-config startup-config
+
+</details>
+
+ACC_2_1
+
+<details>
+en
+conf t
+hostname ACC_2_1
+no ip domain-lookup
+banner motd #Unauthorized access prohibited! Uhodi#
+vlan 42
+name YPR
+interface vlan 42
+ip address 10.42.42.22 255.255.255.0
+ip default-gateway 10.42.42.1
+interface Loopback0
+ip address 10.42.0.22 255.255.255.255
+no shutdown
+exit
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1-4094 priority 32768
+interface e 0/0
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+no shutdown
+exit
+interface e 0/1
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+spanning-tree vlan 1-4094 cost 200
+no shutdown
+exit
+interface e 0/3
+spanning-tree portfast
+exit
+interface e 0/2
+spanning-tree portfast
+exit
+exit
+copy running-config startup-config
+
+</details>
+
+
+ACC_2_2
+
+<details>
+en
+conf t
+hostname ACC_2_2
+no ip domain-lookup
+banner motd #Unauthorized access prohibited! Uhodi#
+vlan 42
+name YPR
+interface vlan 42
+ip address 10.42.42.23 255.255.255.0
+ip default-gateway 10.42.42.1
+interface Loopback0
+ip address 10.42.0.23 255.255.255.255
+no shutdown
+exit
+spanning-tree mode rapid-pvst
+spanning-tree vlan 1-4094 priority 32768
+interface e 0/0
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+no shutdown
+exit
+interface e 0/2
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+spanning-tree vlan 1-4094 cost 200
+no shutdown
+exit
+interface e 0/1
+spanning-tree portfast
+exit
+interface e 0/3
+spanning-tree portfast
+exit
+exit
+copy running-config startup-config
+
+</details>
+
+
+ACC_3_1
+
+<details>
+en
+conf t
+hostname ACC_3_1
+no ip domain-lookup
+banner motd #Unauthorized access prohibited! Uhodi#
+vlan 42
+name YPR
+interface vlan 42
+ip address 10.42.42.24 255.255.255.0
+ip default-gateway 10.42.42.1
+no shutdown
+interface Loopback0
+ip address 10.42.0.24 255.255.255.255
+exit
+spanning-tree mode rapid-pvstdo 
+spanning-tree vlan 1-4094 priority 4096
+interface e 0/0
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+no shutdown
+exit
+interface e 0/3
+switchport
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all
+spanning-tree portfast disable
+spanning-tree bpduguard disable
+spanning-tree vlan 1-4094 cost 200
+no shutdown
+exit
+interface e 0/1
+spanning-tree portfast
+exit
+interface e 0/2
+spanning-tree portfast
+exit
+exit
+copy running-config startup-config
+
+</details>
+
+### Конфиг маршрутизаторов агрегации
+<a name="Конфиг маршрутизаторов агрегации"></a>
+
+
+#### Полный набор команд для конфигурации
+
+Agr1
+
+<details>
+
+</details>
 
 
 
 
-<img width="989" height="730" alt="image" src="https://github.com/user-attachments/assets/1608de35-7ef7-4b3c-9c5a-2fdf1686dd1e" />
+
+<details>
+
+</details>
 
 
-<img width="1077" height="813" alt="image" src="https://github.com/user-attachments/assets/04a3ff61-8089-4724-ad01-03bb78fd6323" />
-<img width="995" height="777" alt="image" src="https://github.com/user-attachments/assets/3b5d70c4-27a6-4963-b157-20bcac315191" />
+
+
+
+<details>
+
 </details>
 
 
@@ -139,34 +363,16 @@ Loopback - 10.42.0.xx/32
 
 
 
+<details>
+
+</details>
 
 
 
 
+<details>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</details>
 
 
 
