@@ -1,3 +1,82 @@
+
+# Расширение сети небольшого оператора связи
+
+### Содержание
+
+## <a id="title1">Заголовок 1</a>
+Какой-то контент
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <img width="328" height="832" alt="image" src="https://github.com/user-attachments/assets/d40fc2f1-ff39-4920-8ebc-d2e9f1b994ce" />
 
 <img width="501" height="854" alt="image" src="https://github.com/user-attachments/assets/c33ff7b7-7c3a-4a33-92d9-fa4aadfc2c3c" />
