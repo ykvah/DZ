@@ -14,9 +14,9 @@
 
 [Конфиг маршрутизаторов агрегации](#Конфиг_маршрутизаторов_агрегации)
 
-[Адресация](#Адресация)
+[Конфиг маршрутизаторов ядра](#Конфиг_маршрутизаторов_ядра)
 
-[Задачи](#задачи)
+[Конфиг BRAS](#Конфиг_BRAS)
 
 
 
@@ -56,7 +56,7 @@
 
 Брас или новый или уже имеющийся
 
-("победить" EVE-ng не удалось и вместо образа браса у меня выступает аналог Циски 7200 )
+("победить" EVE-ng не удалось и вместо образа ASR у меня выступает аналог Циски 7200 )
 
 core_1 и core_2 выполняют функции ядра. Могут соединятся с другими маршрутизаторами ядра.
 
@@ -1130,30 +1130,444 @@ copy running-config startup-config
 </details>
 
 
+---
+---
+---
+### Конфиг маршрутизаторов ядра
+<a name="Конфиг_маршрутизаторов_ядра"></a>
 
 
+#### Полный набор команд для конфигурации
+ 
 
-
-
+---
+##### Core_1
 
 <details>
+en
+   
+conf t
+   
+hostname core_1
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+interface e1/1.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.1 255.255.255.0
+   
+interface Loopback0
+   
+ip address 10.42.0.1 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/0
+   
+description UPLINK
+   
+ip address 10.0.3.1 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.1.17 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.1.1 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/3
+   
+ip address 10.0.1.5 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0 
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.1
+   
+network 10.42.0.1 0.0.0.0 area 0
+   
+network 10.0.3.1 0.0.0.0 area 0
+   
+network 10.0.1.1 0.0.0.0 area 0
+   
+network 10.0.1.5 0.0.0.0 area 0
+   
+network 10.0.1.17 0.0.0.0 area 0
+
+mpls ldp router-id Loopback0 force
+
+router bgp 420000
+
+bgp router-id 10.42.0.1
+
+bgp log-neighbor-changes
+
+neighbor 10.42.0.11 remote-as 420000
+
+neighbor 10.42.0.11 update-source Loopback0
+
+address-family ipv4
+
+neighbor 10.42.0.11 activate
+
+exit-address-family
+
+address-family vpnv4
+
+neighbor 10.42.0.11 activate
+
+neighbor 10.42.0.11 send-community both
+
+exit-address-family
+
+
+exit
+
+ip route 0.0.0.0 0.0.0.0 10.42.0.30
+
+exit
+
+copy running-config startup-config
 
 </details>
 
 
-
+---
+##### Core_2
 
 <details>
+en
+conf t
+hostname core_2
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+interface e1/1.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.2 255.255.255.0
+   
+ip default-gateway 10.42.42.1
+   
+interface Loopback0
+   
+ip address 10.42.0.2 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/0
+   
+description UPLINK
+   
+ip address 10.0.3.5 255.255.255.252
+   
+no shutdown
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.1.18 255.255.255.252
+   
+no shutdown
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.1.9 255.255.255.252
+   
+no shutdown
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/3
+   
+ip address 10.0.1.13 255.255.255.252
+   
+no shutdown
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.2
+   
+network 10.42.0.1 0.0.0.0 area 0
+   
+network 10.0.3.5 0.0.0.0 area 0
+   
+network 10.0.1.9 0.0.0.0 area 0
+   
+network 10.0.1.13 0.0.0.0 area 0
+   
+network 10.0.1.18 0.0.0.0 area 0
+   
+mpls ldp router-id Loopback0 force
+   
+router bgp 420000
+   
+bgp router-id 10.42.0.2
+   
+bgp log-neighbor-changes
+   
+neighbor 10.42.0.11 remote-as 420000
+   
+neighbor 10.42.0.11 update-source Loopback0
+   
+address-family ipv4
+   
+neighbor 10.42.0.11 activate
+   
+exit-address-family
+   
+address-family vpnv4
+   
+neighbor 10.42.0.11 activate
+   
+neighbor 10.42.0.11 send-community both
+   
+exit-address-family
+   
+exit
+   
+exit
+   
+copy running-config startup-config
 
 </details>
 
 
+---
+---
+---
+### Конфиг BRAS
+<a name="Конфиг_BRAS"></a>
+
+
+#### Полный набор команд для конфигурации "заменителя" BRAS
+ 
+
+---
+##### BRAS
+
+<details>
+en
+   
+conf t
+   
+hostname BRAS
+   
+no ip domain-lookup
+   
+banner motd #Unauthorized access prohibited! Uhodi#
+   
+interface e0/0.42
+   
+description YPR
+   
+encapsulation dot1q 42
+   
+ip address 10.42.42.30 255.255.255.0
+   
+ip default-gateway 10.42.42.1
+   
+interface Loopback0
+   
+ip address 10.42.0.2 255.255.255.255
+   
+no shutdown
+   
+exit
+   
+interface e0/1
+   
+ip address 10.0.3.2 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+interface e0/2
+   
+ip address 10.0.3.6 255.255.255.252
+   
+mpls ip
+   
+ip ospf network point-to-point
+   
+ip ospf 1 area 0
+   
+exit
+   
+router ospf 1
+   
+router-id 10.42.0.30
+   
+network 10.42.0.30 0.0.0.0 area 0
+   
+network 10.0.3.2 0.0.0.0 area 0
+   
+network 10.0.3.6 0.0.0.0 area 0       
+   
+router bgp 420000
+
+bgp log-neighbor-changes
+
+bgp router-id 10.42.0.30
+
+neighbor 10.42.0.11 remote-as 420000
+
+neighbor 10.42.0.11 update-source Loopback0
+
+address-family vpnv4
+
+neighbor 10.42.0.11 activate
+
+neighbor 10.42.0.11 send-community both
+
+exit-address-family
+
+interface Ethernet0/0.111
+
+encapsulation dot1Q 111
+
+xconnect 10.42.0.11 111 encapsulation mpls
+
+no shutdown
+
+interface Ethernet0/0.211
+
+encapsulation dot1Q 211
+
+xconnect 10.42.0.11 211 encapsulation mpls
+
+interface Ethernet0/0.212
+
+encapsulation dot1Q 212
+
+xconnect 10.42.0.11 212 encapsulation mpls
+
+interface Ethernet0/0.311
+
+encapsulation dot1Q 311
+
+xconnect 10.42.0.11 311 encapsulation mpls
+
+do copy running-config startup-config
+ 
+</details>
+
+
+
+### Подключение клиента
+<a name="Подключение_клиента"></a>
+
+
+#### Схема
+
+Подключаем одного клиента настройки длякоторого есть на всем оборудовании
+
+ <img width="545" height="450" alt="111" src="https://github.com/user-attachments/assets/b3ef9839-53db-44ac-895b-0d4d2f6e51f9" />
+
+
+---
+##### Проверяем статусы на всем пути 
+
+<img width="1916" height="1018" alt="итог" src="https://github.com/user-attachments/assets/4a815c09-baad-45bd-bd26-a0ce29a7c5d5" />
+
+Заставить генерировать трафик "клиента" не удалось
+или это связано с особенностью образа который я использовал вместо ASR yно иза этого мак клиента не отображается.
 
 
 
 
 
 
+
+
+Бонус отсутствующий в оглавлении
+
+<details>
+Несколько предыдущих топологий которые эволюционировали в нормальную для оператора
+
+   
+</details>
 
 
 
