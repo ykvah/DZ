@@ -146,8 +146,8 @@ Loopback - 10.42.0.xx/32
 #### Полный набор команд для конфигурации коммутаторов
 
 
-
-⋅⋅*ACC_1_1
+---
+##### ACC_1_1
 
 <details>
 en
@@ -241,8 +241,8 @@ copy running-config startup-config
 
 
 
-
-⋅⋅* ACC_2_1
+---
+##### ACC_2_1
 
 <details>
 en
@@ -336,7 +336,7 @@ copy running-config startup-config
 
 
 
-
+---
    ##### ACC_2_2
 
 <details>
@@ -431,7 +431,7 @@ copy running-config startup-config
 
 
 
-
+---
    ##### ACC_3_1
 
 <details>
@@ -532,14 +532,14 @@ copy running-config startup-config
 
 #### Полный набор команд для конфигурации
 
-Agr1
+##### Agr1
 
 <details>
 
 </details>
 
 
-
+---
 
 
 <details>
