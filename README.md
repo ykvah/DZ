@@ -19,9 +19,7 @@
 <a name="Схема"></a>
 
 <details>
- 
-<img width="970" height="657" alt="сх" src="https://github.com/user-attachments/assets/4488fc74-f3e7-492b-8f0b-70f5455b5efa" />
-
+<img width="970" height="650" alt="1" src="https://github.com/user-attachments/assets/a1aae947-aa29-45c6-a292-bec08febcb2d" />
 </details>
 
 
