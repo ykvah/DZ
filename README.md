@@ -112,20 +112,20 @@ Loopback - 10.42.0.xx/32
 ### Конфиг коммутаторов 
 <a name="Конфиг_коммутаторов"></a>
 
-настройка стп на кольце 
+Настройка стп на кольце.
 
-позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1
+Позже еще увеличил веса линков между ACC_1_1 и ACC_2_2 // ACC_3_1 и ACC_2_1.
 
-например, на ACC_1_1 (порт к ACC_2_2)
+Например, на ACC_1_1 (порт к ACC_2_2)
 
-<details>
+<Пример>
 <img width="937" height="1028" alt="image" src="https://github.com/user-attachments/assets/1d408725-9d5f-467e-aefe-de3075b67d05" />
 
 уже исправленный ACC_3_1
 
 <img width="668" height="984" alt="image" src="https://github.com/user-attachments/assets/9362267d-b436-402a-9bec-9185b989ee58" />
 
-</details>
+</Пример>
 
 ---
 ---
