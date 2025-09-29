@@ -1,3 +1,4 @@
+<img width="1222" height="685" alt="image" src="https://github.com/user-attachments/assets/3478159a-8591-4322-aa57-7adf4d89dd52" />
 
 # Расширение сети небольшого оператора связи
 
